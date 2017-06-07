@@ -29,38 +29,79 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tmn-er-5QO">
-                                <rect key="frame" x="16" y="96" width="343" height="551"/>
+                                <rect key="frame" x="191.5" y="96" width="167.5" height="551"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeF-Rg-cWQ">
-                                <rect key="frame" x="259" y="58" width="100" height="30"/>
+                                <rect key="frame" x="16" y="58" width="135" height="30"/>
+                                <color key="backgroundColor" red="0.94117647409439087" green="0.86666667461395264" blue="0.99607843160629272" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="1tE-nR-52f"/>
-                                    <constraint firstAttribute="width" constant="100" id="4zD-Sd-adg"/>
+                                    <constraint firstAttribute="width" constant="135" id="LA9-gA-FsT"/>
+                                    <constraint firstAttribute="height" constant="30" id="aKG-xj-fhv"/>
                                 </constraints>
-                                <state key="normal" title="Fetch"/>
+                                <state key="normal" title="Fetch On UI Thread"/>
                                 <connections>
                                     <action selector="FetchDocumentTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="58V-eG-4xr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cul-w6-qyT">
+                                <rect key="frame" x="159" y="58" width="79" height="30"/>
+                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.91372549533843994" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KDR-cx-Pkc"/>
+                                    <constraint firstAttribute="width" constant="79" id="Zao-XJ-HWE"/>
+                                </constraints>
+                                <state key="normal" title="Fetch Task"/>
+                                <connections>
+                                    <action selector="FetchDocumentInTaskTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a3H-3E-N8R"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFH-Ns-J1n">
+                                <rect key="frame" x="246" y="58" width="113" height="30"/>
+                                <color key="backgroundColor" red="0.81568628549575806" green="0.86666667461395264" blue="0.30588236451148987" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="nQM-sc-g09"/>
+                                    <constraint firstAttribute="width" constant="113" id="zeq-NX-0nB"/>
+                                </constraints>
+                                <state key="normal" title="Fetch Cust Ctx"/>
+                                <connections>
+                                    <action selector="FetchDocumentInCustomContextTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nrS-bT-x02"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dpa-fQ-bzB">
+                                <rect key="frame" x="16" y="96" width="167.5" height="551"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Tmn-er-5QO" secondAttribute="bottom" constant="20" id="2rd-ak-MUQ"/>
+                            <constraint firstItem="Tmn-er-5QO" firstAttribute="leading" secondItem="dpa-fQ-bzB" secondAttribute="trailing" constant="8" id="3oS-zU-Qxh"/>
                             <constraint firstItem="luj-V3-4fz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="95x-lO-ngB"/>
-                            <constraint firstItem="eeF-Rg-cWQ" firstAttribute="top" secondItem="luj-V3-4fz" secondAttribute="bottom" constant="8" id="9iu-pp-DSK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="eeF-Rg-cWQ" secondAttribute="trailing" id="Ghn-3h-1Xs"/>
-                            <constraint firstItem="Tmn-er-5QO" firstAttribute="top" secondItem="eeF-Rg-cWQ" secondAttribute="bottom" constant="8" id="H5c-Hh-bNB"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Tmn-er-5QO" secondAttribute="bottom" constant="20" id="Pmj-sT-sLC"/>
-                            <constraint firstItem="Tmn-er-5QO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="e7z-3j-Sqk"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Tmn-er-5QO" secondAttribute="trailing" id="sc0-nr-74R"/>
+                            <constraint firstItem="Tmn-er-5QO" firstAttribute="width" secondItem="dpa-fQ-bzB" secondAttribute="width" id="9Js-Vm-pSk"/>
+                            <constraint firstItem="Tmn-er-5QO" firstAttribute="leading" secondItem="dpa-fQ-bzB" secondAttribute="trailing" constant="8" id="A0S-Kw-CG4"/>
+                            <constraint firstItem="YFH-Ns-J1n" firstAttribute="leading" secondItem="Cul-w6-qyT" secondAttribute="trailing" constant="8" id="A5x-Ie-AAl"/>
+                            <constraint firstItem="dpa-fQ-bzB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="E3e-Ma-14L"/>
+                            <constraint firstItem="Tmn-er-5QO" firstAttribute="top" secondItem="YFH-Ns-J1n" secondAttribute="bottom" constant="8" id="F4D-xt-mUK"/>
+                            <constraint firstItem="Cul-w6-qyT" firstAttribute="top" secondItem="luj-V3-4fz" secondAttribute="bottom" constant="8" id="JoX-3S-8Je"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dpa-fQ-bzB" secondAttribute="bottom" constant="20" id="LEC-dS-DPu"/>
+                            <constraint firstItem="Tmn-er-5QO" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="PWX-XD-PW6"/>
+                            <constraint firstItem="Cul-w6-qyT" firstAttribute="leading" secondItem="eeF-Rg-cWQ" secondAttribute="trailing" constant="8" id="S9D-sq-Whw"/>
+                            <constraint firstItem="eeF-Rg-cWQ" firstAttribute="top" secondItem="luj-V3-4fz" secondAttribute="bottom" constant="8" id="Txf-uf-a6d"/>
+                            <constraint firstItem="YFH-Ns-J1n" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="p6E-BP-21x"/>
                             <constraint firstItem="luj-V3-4fz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="tzV-IV-hdd"/>
+                            <constraint firstItem="dpa-fQ-bzB" firstAttribute="top" secondItem="Cul-w6-qyT" secondAttribute="bottom" constant="8" id="u5u-m5-hPy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="luj-V3-4fz" secondAttribute="trailing" id="xCm-45-Jnf"/>
+                            <constraint firstItem="YFH-Ns-J1n" firstAttribute="top" secondItem="luj-V3-4fz" secondAttribute="bottom" constant="8" id="yJu-fD-9kc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="AddressBox" destination="luj-V3-4fz" id="ERS-ZM-krR"/>
+                        <outlet property="DebugConsole" destination="dpa-fQ-bzB" id="wMu-8V-lak"/>
                         <outlet property="FetchDocumentButton" destination="eeF-Rg-cWQ" id="DIW-Ca-Zqe"/>
                         <outlet property="OutputArea" destination="Tmn-er-5QO" id="PSj-wB-G2Z"/>
                     </connections>

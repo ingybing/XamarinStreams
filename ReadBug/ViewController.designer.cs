@@ -16,10 +16,19 @@ namespace ReadBug
 		UIKit.UITextField AddressBox { get; set; }
 
 		[Outlet]
+		UIKit.UITextView DebugConsole { get; set; }
+
+		[Outlet]
 		UIKit.UIButton FetchDocumentButton { get; set; }
 
 		[Outlet]
 		UIKit.UITextView OutputArea { get; set; }
+
+		[Action ("FetchDocumentInCustomContextTouched:")]
+		partial void FetchDocumentInCustomContextTouched (Foundation.NSObject sender);
+
+		[Action ("FetchDocumentInTaskTouched:")]
+		partial void FetchDocumentInTaskTouched (Foundation.NSObject sender);
 
 		[Action ("FetchDocumentTouched:")]
 		partial void FetchDocumentTouched (Foundation.NSObject sender);
@@ -39,6 +48,11 @@ namespace ReadBug
 			if (OutputArea != null) {
 				OutputArea.Dispose ();
 				OutputArea = null;
+			}
+
+			if (DebugConsole != null) {
+				DebugConsole.Dispose ();
+				DebugConsole = null;
 			}
 		}
 	}
