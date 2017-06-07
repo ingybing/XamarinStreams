@@ -117,38 +117,40 @@ namespace ReadBug
 			this.DebugOutput("Creating Request.");
 			var request = (HttpWebRequest)WebRequest.Create(url);
 			this.DebugOutput("Getting Response.");
-			var response = request.GetResponse();
 			var stringBuilder = new StringBuilder();
 
-			this.DebugOutput("Processing response stream");
-			using (var stream = response.GetResponseStream())
-			{
-				if (stream != null)
-				{
-					const int BufferSize = 5000;
-					this.DebugOutput("Buffer size: " + BufferSize);
-					var encoding = Encoding.ASCII;
-					using (var streamReader = new StreamReader(stream, encoding))
-					{
-						var buffer = new char[BufferSize];
-						var count = streamReader.Read(buffer, 0, BufferSize);
-						this.DebugOutput("Count: " + count);
-						while (count > 0)
-						{
-							stringBuilder.Append(new string(buffer, 0, count));
-							this.DebugOutput("StringBuilder Length: " + stringBuilder.Length);
-							this.DebugOutput("Reading Stream Again");
-							count = streamReader.Read(buffer, 0, BufferSize);
-							this.DebugOutput("Count: " + count);
-						}
+            using (var response = request.GetResponse())
+            {
+                this.DebugOutput("Processing response stream");
+                using (var stream = response.GetResponseStream())
+                {
+                    if (stream != null)
+                    {
+                        const int BufferSize = 5000;
+                        this.DebugOutput("Buffer size: " + BufferSize);
+                        var encoding = Encoding.ASCII;
+                        using (var streamReader = new StreamReader(stream, encoding))
+                        {
+                            var buffer = new char[BufferSize];
+                            var count = streamReader.Read(buffer, 0, BufferSize);
+                            this.DebugOutput("Count: " + count);
+                            while (count > 0)
+                            {
+                                stringBuilder.Append(new string(buffer, 0, count));
+                                this.DebugOutput("StringBuilder Length: " + stringBuilder.Length);
+                                this.DebugOutput("Reading Stream Again");
+                                count = streamReader.Read(buffer, 0, BufferSize);
+                                this.DebugOutput("Count: " + count);
+                            }
 
-						this.DebugOutput("SUCCESS, closing stream etc");
-						streamReader.Close();
-						stream.Close();
-						response.Close();
-					}
-				}
-			}
+                            this.DebugOutput("SUCCESS, closing stream etc");
+                            streamReader.Close();
+                            stream.Close();
+                            response.Close();
+                        }
+                    }
+                }
+            }
 
 			this.DisplayOutput(stringBuilder.ToString());
 		}
