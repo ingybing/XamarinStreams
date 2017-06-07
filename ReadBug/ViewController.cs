@@ -89,7 +89,9 @@ namespace ReadBug
 
 		private void DebugOutput(string output)
 		{
-			this.InvokeOnMainThread(() => { this.DebugConsole.Text = this.DebugConsole.Text + "\n" + output; });
+            var threadId = Thread.CurrentThread.ManagedThreadId;
+
+			this.InvokeOnMainThread(() => { this.DebugConsole.Text = this.DebugConsole.Text + "\nThread " + threadId + ": " + output; });
 		}
 
 		private void DisplayOutput(string output)
@@ -200,19 +202,48 @@ namespace ReadBug
 			this.DoWorkInNewThreadAndReturnOnOriginatingThread<bool>(
 				() =>
 				{
-                    this.DebugOutput("SSBT - ACTION Thread ID: " + Thread.CurrentThread.ManagedThreadId);
-					this.DebugOutput("Simulating another async action and performing download after that has finished on it's original thread.");
-                    this.DownloadAndDisplayFile(url);
-					return true;
+                    try
+                    {
+                        this.DebugOutput("SSBT - ACTION Thread ID: " + Thread.CurrentThread.ManagedThreadId);
+                        this.DebugOutput("Simulating another async action and performing download after that has finished on it's original thread.");
+                        this.DownloadAndDisplayFile(url);
+                        return true;
+                    }
+	                catch(Exception ex)
+	                {
+                        this.DebugOutput("Error returning false: " + ex.Message);
+                        return false;
+	                }
 				},
 				result =>
 				{
-                    // SynchronizationContext.SetSynchronizationContext(null);
-                    this.DownloadAndDisplayFile(url);
+                    try
+                    {
+                        if (result == true)
+                        {
+                            // SynchronizationContext.SetSynchronizationContext(null);
+                            this.DownloadAndDisplayFile(url);
+                        }
+                    }
+                    catch(Exception ex)
+	                {
+	                    this.DebugOutput("ERROR in third download attempt: " + ex.Message);   
+	                }
+                    finally
+                    {
+                        NonUiThreadSynchronisationContext.StopNonUISynchronisationContext();
+                    }
                 },
-				this.ExceptionHandler);
+                ex =>
+                {
+                    NonUiThreadSynchronisationContext.StopNonUISynchronisationContext();
+                    this.ExceptionHandler(ex);
 
+                });
+
+            this.DebugOutput("STARTING CUSTOM SYNCHRONIZATIONCONTEXT.");
             NonUiThreadSynchronisationContext.StartNonUISynchronisationContext();
+            this.DebugOutput("CUSTOM SYNCHRONIZATIONCONTEXT HAS BEEN STOPPED");
         }
     }
 }
